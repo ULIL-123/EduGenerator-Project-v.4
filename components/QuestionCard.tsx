@@ -102,6 +102,8 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
                 {!isExplanationVisible ? (
                   <button 
                     onClick={() => setIsExplanationVisible(true)}
+                    aria-expanded="false"
+                    aria-label="Tampilkan penjelasan jawaban dari AI"
                     className="w-full bg-slate-900/50 hover:bg-slate-800 border border-white/10 p-6 rounded-[2rem] flex items-center justify-center gap-4 transition-all group active:scale-95"
                   >
                     <div className="w-8 h-8 rounded-lg bg-blue-600/20 flex items-center justify-center">
@@ -129,6 +131,7 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
                     </div>
                     <button 
                       onClick={() => setIsExplanationVisible(false)}
+                      aria-label="Sembunyikan penjelasan AI"
                       className="mt-4 mx-auto block text-[9px] font-black text-slate-700 uppercase tracking-widest hover:text-blue-500 transition-colors"
                     >
                       Hide Analysis
@@ -206,6 +209,8 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
                   key={i} 
                   disabled={!interactive}
                   onClick={() => interactive && (question.type === 'Pilihan Ganda' ? handleMCChange(opt) : handleMCMAChange(opt))}
+                  aria-pressed={isSelected}
+                  aria-label={`Pilih opsi ${letter}: ${opt}`}
                   className={`group relative flex items-center p-8 border-2 rounded-[3rem] transition-all duration-500 text-left ${
                     isSelected 
                       ? 'bg-gradient-to-br from-blue-700 to-indigo-900 border-blue-400 shadow-3xl shadow-blue-600/30 -translate-y-2' 
@@ -245,6 +250,8 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
                               key={cat}
                               disabled={!interactive}
                               onClick={() => interactive && handleCategoryChange(i, cat)}
+                              aria-pressed={currentAnswer?.[i] === cat}
+                              aria-label={`Pilih ${cat} untuk pernyataan ${i + 1}: ${item.statement}`}
                               className={`px-8 py-4 rounded-2xl text-[12px] font-black uppercase tracking-[0.3em] transition-all duration-300 ${
                                 currentAnswer?.[i] === cat 
                                 ? 'bg-blue-600 text-white shadow-2xl shadow-blue-600/40 translate-y-[-4px] border-2 border-blue-400' 
